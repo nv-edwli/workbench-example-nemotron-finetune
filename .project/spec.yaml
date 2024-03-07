@@ -22,7 +22,7 @@ layout:
 environment:
   base:
     registry: nvcr.io
-    image: ea-bignlp/ga-participants/nemofw-training:23.08.03
+    image: ea-bignlp/ga-participants/nemofw-training:24.01
     build_timestamp: "20230929092614"
     name: NeMo Framework GA Training Container
     supported_architectures:
@@ -34,6 +34,16 @@ environment:
     - cuda12.2
     - pytorch2.1
     apps:
+    - name: Setup
+      type: custom
+      class: process
+      start_command: /bin/bash /project/code/scripts/init.sh
+      health_check_command: pgrep -f "^/bin/bash /project/code/scripts/init.sh" >/dev/null
+      stop_command: pkill -f "^/bin/bash /project/code/scripts/init.sh"
+      user_msg: ""
+      icon_url: ""
+      process_options:
+        wait_until_finished: true
     - name: jupyterlab
       type: jupyterlab
       class: webapp
@@ -71,7 +81,7 @@ environment:
     programming_languages:
     - python3
     icon_url: ""
-    image_version: 1.0.13
+    image_version: "24.01"
     os: linux
     os_distro: ubuntu
     os_distro_release: "20.04"
@@ -83,27 +93,10 @@ environment:
     package_managers:
     - name: apt
       binary_path: /usr/bin/apt
-      installed_packages:
-      - build-essential
-      - ca-certificates
-      - curl
-      - locales
-      - git
-      - git-lfs
-      - openssl=1.1.1f-1ubuntu2.17
-      - libssl1.1=1.1.1f-1ubuntu2.17
-      - vim
+      installed_packages: []
     - name: conda
       binary_path: /opt/conda/bin/conda
-      installed_packages:
-      - jupyterlab=3.4.4
-      - tensorboard
-      - nodejs
-      - notebook
-      - python=3.10.12
-      - pytorch=1.13.1
-      - torchvision
-      - pytorch-cuda=11.7.0
+      installed_packages: []
     - name: pip
       binary_path: /opt/conda/bin/pip
       installed_packages: []
@@ -116,7 +109,11 @@ execution:
     gpu:
       requested: 1
     sharedMemoryMB: 1024
-  secrets: []
+  secrets:
+  - variable: HF_USERNAME
+    description: Hugging Face account username for Accessing Llama 2
+  - variable: HF_API_KEY
+    description: Hugging Face API Key for Accessing Llama 2
   mounts:
   - type: project
     target: /project/
@@ -128,5 +125,5 @@ execution:
     options: volumeName=tensorboard-logs-volume
   - type: host
     target: /project/models/
-    description: Location of NeMotron Model
+    description: Location on HOST that will contain the Nemotron model
     options: ""
