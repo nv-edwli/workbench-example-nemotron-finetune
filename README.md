@@ -49,11 +49,9 @@ If you do not NVIDIA AI Workbench installed, first follow the installation instr
 
    * `Environment` &rarr; `Secrets` &rarr; `Configure`. Specify the Hugging Face username and API Key secrets.
 
-6. On the top right of the window, select **Setup** to set up the model. _This will take several minutes to run_ as the model is pulled from Hugging Face.
+6. On the top right of the window, select **Jupyterlab**. 
 
-7. Upon completion, select the _dropdown_ from the top right of the window. Select **Jupyterlab**. Verify ```nemotron-3-8b-base-4k/Nemotron-3-8B-Base-4k.nemo``` exists under the ```models```directory of the project.
-
-8. Navigate to the `code/notebooks` directory of the project. Then, open your fine-tuning notebook of choice and get started. Happy coding!
+7. Navigate to the `code/notebooks` directory of the project. Then, open your fine-tuning notebook of choice and get started. Happy coding!
 
 ### Tutorial (CLI-Only)
 Some users may choose to use the **CLI tool only** instead of the Desktop App. If you do not NVIDIA AI Workbench installed, first follow the installation instructions for AI Workbench [here](https://developer.nvidia.com/ai-workbench-beta/). Then, 
@@ -84,11 +82,11 @@ Some users may choose to use the **CLI tool only** instead of the Desktop App. I
    
    $ nvwb open <project_name>
    ```
-   
-5. Start **Setup** by
+
+5. Start **Jupyterlab** by
 
    ```
-   $ nvwb start setup
+   $ nvwb start jupyterlab
    ```
 
    * Specify the file path of the mount, eg. where the Nemotron model will live on your **host** machine.
@@ -97,15 +95,7 @@ Some users may choose to use the **CLI tool only** instead of the Desktop App. I
 
    * Specify the Hugging Face username and API Key secrets.
 
-6. Start **Jupyterlab** by
-
-   ```
-   $ nvwb start jupyterlab
-   ```
-
-7. Verify ```nemotron-3-8b-base-4k/Nemotron-3-8B-Base-4k.nemo``` exists under the ```models```directory of the project.
-
-8. Navigate to the `code/notebooks` directory of the project. Then, open your fine-tuning notebook of choice and get started. Happy coding!
+7. Navigate to the `code/notebooks` directory of the project. Then, open your fine-tuning notebook of choice and get started. Happy coding!
 
 ---
 **Tip:** Use ```nvwb help``` to see a full list of NVIDIA AI Workbench commands. 
